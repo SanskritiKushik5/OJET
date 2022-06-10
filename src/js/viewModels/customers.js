@@ -10,10 +10,11 @@
  */
 define([
   "knockout",
+  "utils/Core",
   "ojs/ojinputtext",
   "ojs/ojinputnumber",
   "ojs/ojformlayout",
-], function (ko) {
+], function (ko, CoreUtils) {
   function CustomerViewModel() {
     this._initAllObservables();
     this._initAllIds();
@@ -25,7 +26,11 @@ define([
    * @description Initializes all ids.
    */
   CustomerViewModel.prototype._initAllIds = function () {
-    this.inputFirstNameId = "input-first-name";
+    this.inputFirstNameId = CoreUtils.generateUniqueId();
+    this.inputLastNameId = CoreUtils.generateUniqueId();
+    this.inputFullNameId = CoreUtils.generateUniqueId();
+    this.inputWeightId = CoreUtils.generateUniqueId();
+    this.inputAgeId = CoreUtils.generateUniqueId();
   };
 
   /**

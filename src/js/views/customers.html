@@ -18,22 +18,26 @@
   >
   </oj-input-text>
   <oj-input-number
-    id="input-weight"
+    :id="[[inputWeightId]]"
     value="{{inputWeightValue}}"
     label-hint="Weight"
   >
   </oj-input-number>
   <oj-input-text
-    id="input-last-name"
+    :id="[[inputLastNameId]]"
     value="{{inputLastNameValue}}"
     disabled="[[isInputLastNameDisabled]]"
     label-hint="Last Name"
   >
   </oj-input-text>
-  <oj-input-number id="input-age" value="{{inputAgeValue}}" label-hint="Age">
+  <oj-input-number
+    :id="[[inputAgeId]]"
+    value="{{inputAgeValue}}"
+    label-hint="Age"
+  >
   </oj-input-number>
   <oj-input-text
-    id="input-full-name"
+    :id="[[inputFullNameId]]"
     value="{{inputFullNameValue}}"
     disabled
     label-hint="Full Name"
