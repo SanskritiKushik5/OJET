@@ -17,9 +17,21 @@ define([
   function CustomerViewModel() {
     this.inputFirstNameValue = ko.observable(null);
     this.inputLastNameValue = ko.observable(null);
-    this.inputFullNameValue = ko.observable(null);
+    this.inputFullNameValue = ko.computed(function () {
+      if (this.inputFirstNameValue() && this.inputLastNameValue()) {
+        return `${this.inputFirstNameValue()} ${this.inputLastNameValue()}`;
+      }
+      return "";
+    }, this);
     this.inputAgeValue = ko.observable(null);
     this.inputWeightValue = ko.observable(null);
+
+    this.isInputFullNameDisabled = ko.computed(function () {
+      if (this.inputFirstNameValue() && this.inputLastNameValue()) {
+        return false;
+      }
+      return true;
+    }, this);
   }
 
   /*
