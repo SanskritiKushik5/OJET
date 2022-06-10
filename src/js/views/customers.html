@@ -11,9 +11,10 @@
   class="oj-formlayout-full-width"
 >
   <oj-input-text
-    id="input-first-name"
+    :id="[[inputFirstNameId]]"
     value="{{inputFirstNameValue}}"
-    label-hint="First Name"
+    on-value-changed="[[onInputFirstNameValueChange]]"
+    label-hint="[[inputFirstNameLabel]]"
   >
   </oj-input-text>
   <oj-input-number
@@ -25,6 +26,7 @@
   <oj-input-text
     id="input-last-name"
     value="{{inputLastNameValue}}"
+    disabled="[[isInputLastNameDisabled]]"
     label-hint="Last Name"
   >
   </oj-input-text>
@@ -33,7 +35,7 @@
   <oj-input-text
     id="input-full-name"
     value="{{inputFullNameValue}}"
-    disabled="[[isInputFullNameDisabled]]"
+    disabled
     label-hint="Full Name"
   >
   </oj-input-text>

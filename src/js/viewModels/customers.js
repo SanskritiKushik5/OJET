@@ -15,24 +15,53 @@ define([
   "ojs/ojformlayout",
 ], function (ko) {
   function CustomerViewModel() {
+    this._initAllObservables();
+    this._initAllIds();
+    this._initAllLabels();
+  }
+
+  /**
+   * @function _initAllObservables
+   * @description Initializes all ids.
+   */
+  CustomerViewModel.prototype._initAllIds = function () {
+    this.inputFirstNameId = "input-first-name";
+  };
+
+  /**
+   * @function _initAllObservables
+   * @description Initializes all labels.
+   */
+  CustomerViewModel.prototype._initAllLabels = function () {
+    this.inputFirstNameLabel = "First name";
+  };
+
+  /**
+   * @function _initAllObservables
+   * @description Initializes all the observable values.
+   */
+  CustomerViewModel.prototype._initAllObservables = function () {
     this.inputFirstNameValue = ko.observable(null);
     this.inputLastNameValue = ko.observable(null);
-    this.inputFullNameValue = ko.computed(function () {
-      if (this.inputFirstNameValue() && this.inputLastNameValue()) {
-        return `${this.inputFirstNameValue()} ${this.inputLastNameValue()}`;
-      }
-      return "";
-    }, this);
+    this.inputFullNameValue = ko.observable(null);
     this.inputAgeValue = ko.observable(null);
     this.inputWeightValue = ko.observable(null);
+    this.isInputLastNameDisabled = ko.observable(true);
 
-    this.isInputFullNameDisabled = ko.computed(function () {
-      if (this.inputFirstNameValue() && this.inputLastNameValue()) {
-        return false;
+    this.onInputFirstNameValueChange = function (event) {
+      const value = event.detail.value;
+      if (value) {
+        this.isInputLastNameDisabled(false);
+        return;
       }
-      return true;
+      this.isInputLastNameDisabled(true);
+    }.bind(this);
+    this.inputLastNameValue.subscribe(function (_) {
+      this.inputFullNameValue(
+        `${this.inputFirstNameValue()} ${this.inputLastNameValue()}`
+      );
     }, this);
-  }
+  };
 
   /*
    * Returns an instance of the ViewModel providing one instance of the ViewModel. If needed,
